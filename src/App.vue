@@ -31,6 +31,7 @@
             @setTexture="changeTexture"
             @setColor="changeColor"
             @removeRoom="removeRoom"
+            @changeRoomName="changeRoomName"
       />
     </div>
   </div>
@@ -166,6 +167,10 @@ export default {
     removeRoom() {
       this.rooms = this.rooms.filter(room => room.id !== this.selectedRoomId);
       this.setSelectedRoomId(1);
+    },
+
+    changeRoomName(value) {
+      this.currentRoom.name = value;
     },
   }
 }

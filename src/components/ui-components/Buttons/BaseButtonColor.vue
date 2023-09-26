@@ -1,22 +1,21 @@
 <template>
   <div class="base-button-color">
-    <div class="question">?</div>
-    <button><slot></slot></button>
+    <button>
+      <slot></slot>
+      <div class="question">?</div>
+    </button>
   </div>
 </template>
 
 <script>
 
-export default {
-
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
 .base-button-color {
   max-width: 232px;
   max-height: 60px;
-  position: relative;
 
   .question {
     width: 25px;
@@ -37,6 +36,7 @@ export default {
   button {
     @include style-button;
 
+    position: relative;
     background: #BF3266;
     color: #FFF;
     border: none;

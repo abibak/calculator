@@ -37,18 +37,9 @@ export default {
 </script>
 
 <style lang="scss">
-$maxWidth: 450px;
 
 .form-order {
-  width: 100%;
-  max-width: $maxWidth;
-  padding: 25px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 54.95px 0 rgba(133, 133, 133, 0.25);
-  position: absolute;
-  left: calc(50% - 450px / 2);
-  z-index: 1;
+  @include form;
 
   .title-order {
     font-size: 36px;

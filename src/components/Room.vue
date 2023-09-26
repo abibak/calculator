@@ -1,10 +1,13 @@
 <template>
   <div class="room">
-    <div class="background-form" v-if="showFormOrder"></div>
+    <div class="background-form" v-if="showFormOrder || showFormRoomEdit"></div>
     <FormOrder v-if="showFormOrder" @closeForm="setShowFormOrder(false)"/>
+    <FormRoomEdit :old-name="room.name" v-if="showFormRoomEdit" @closeForm="setShowFormRoomEdit(false)" @changeRoomName="changeRoomName"/>
 
     <div class="container-room">
       <div class="form-group">
+
+        <span class="change-room-name" @click="setShowFormRoomEdit(true)">Изменить название</span>
         <span class="remove-room" @click="removeRoom" v-if="room.id !== 1">Удалить комнату</span>
 
         <div class="elements">
@@ -57,10 +60,11 @@ import BaseButtonColor from "@/components/ui-components/Buttons/BaseButtonColor"
 import BaseButtonNonColor from "@/components/ui-components/Buttons/BaseButtonNonColor";
 import InputCounter from "@/components/ui-components/Counter/InputCounter";
 import FormOrder from "@/components/FormOrder";
+import FormRoomEdit from "@/components/FormRoomEdit";
 
 export default {
   name: "Room",
-  components: {BaseSelect, InputCounter, BaseButtonColor, BaseButtonNonColor, FormOrder},
+  components: {BaseSelect, InputCounter, BaseButtonColor, BaseButtonNonColor, FormOrder, FormRoomEdit},
 
   props: {
     room: {
@@ -82,6 +86,7 @@ export default {
 
   data() {
     return {
+      showFormRoomEdit: false,
       showFormOrder: false,
       inflectedWord: '',
 
@@ -151,6 +156,14 @@ export default {
     setShowFormOrder(value) {
       this.showFormOrder = value;
     },
+
+    setShowFormRoomEdit(value) {
+      this.showFormRoomEdit = value;
+    },
+
+    changeRoomName(value) {
+      this.$emit('changeRoomName', value)
+    },
   },
 }
 </script>
@@ -179,11 +192,18 @@ export default {
       padding: 40px;
 
       .remove-room {
+        @include control;
         color: red;
-        position: absolute;
         right: 10px;
         bottom: 10px;
-        cursor: pointer;
+
+      }
+
+      .change-room-name {
+        @include control;
+        color: green;
+        right: 5px;
+        top: 5px;
       }
     }
 
